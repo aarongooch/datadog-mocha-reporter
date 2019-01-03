@@ -1,0 +1,22 @@
+{
+  "name": "datadog-mocha-reporter",
+  "version": "1.0.0",
+  "description": "Report mocha unit testing results to Datadog API",
+  "main": "datadog-reporter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/aarongooch/datadog-mocha-reporter"
+  },
+  "keywords": [
+    "datadog",
+    "mocha"
+  ],
+  "author": "Aaron Gooch",
+  "license": "MIT",
+  "dependencies": {
+    "dogapi": "^2.8.3"
+  }
+}
