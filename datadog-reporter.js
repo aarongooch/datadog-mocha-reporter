@@ -19,12 +19,12 @@ function DatadogReporter(runner, options) {
     app_key: options.reporterOptions.datadogAPPKey
   });
 
+  process.stdout.write(JSON.stringify(options, null, 2));
 
   Base.call(this, runner);
   new Spec(runner);
 
   const self = this;
-  const env = options.reporterOptions.env || 'production';
   const tags = options.reporterOptions.tags || '';
   const eventTitle = options.reporterOptions.eventTitle || 'Datadog Mocha Reporter';
   const tests = [];
@@ -132,4 +132,6 @@ function errorJSON(err) {
   return res;
 }
 
-DatadogReporter.description = 'single JSON object';
+inherits(DatadogReporter, mocha.reporters.Spec);
+
+DatadogReporter.description = 'datadog test reporting';
