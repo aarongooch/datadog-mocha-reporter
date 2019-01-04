@@ -17,6 +17,7 @@
   "author": "Aaron Gooch",
   "license": "MIT",
   "dependencies": {
+    "cypress": "^3.1.4",
     "dogapi": "^2.8.3",
     "mocha": "^5.2.0"
   }

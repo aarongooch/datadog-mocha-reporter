@@ -1,5 +1,6 @@
-const mocha = require('mocha');
+const Base = require('mocha/lib/reporters/base');
 const dogapi = require('dogapi');
+const Spec = require('mocha/lib/reporters/spec');
 module.exports = DatadogReporter;
 
 /**
@@ -18,7 +19,10 @@ function DatadogReporter(runner, options) {
     app_key: options.reporterOptions.datadogAPPKey
   });
 
-  mocha.reporters.Base.call(this, runner);
+
+  Base.call(this, runner);
+  new Spec(runner);
+
   const self = this;
   const env = options.reporterOptions.env || 'production';
   const tags = options.reporterOptions.tags || '';
