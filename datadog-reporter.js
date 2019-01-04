@@ -20,6 +20,9 @@ function DatadogReporter(runner, options) {
 
   mocha.reporters.Base.call(this, runner);
   const self = this;
+  const env = options.reporterOptions.env || 'production';
+  const tags = options.reporterOptions.tags || '';
+  const eventTitle = options.reporterOptions.eventTitle || 'Datadog Mocha Reporter';
   const tests = [];
   const pending = [];
   const failures = [];
@@ -53,6 +56,13 @@ function DatadogReporter(runner, options) {
     runner.testResults = obj;
 
     process.stdout.write(JSON.stringify(obj, null, 2));
+
+    if (obj.failures.length > 0) {
+      dogapi.event.create(eventTitle, JSON.stringify(obj.failures, null, 2), { tags, alert_type: 'error', aggregation_key: 'test_failures' });
+    } else {
+      dogapi.event.create(eventTitle, `Tests Passed: \n${JSON.stringify(obj.stats, null, 2)}`, { tags, alert_type: 'success' });
+    }
+
   });
 }
 
